@@ -1,0 +1,57 @@
+Privacy Prism 升级报告
+日期：2025-11-10 17:34 CST
+
+报告范围
+--------
+本文对比了当前代码库与 `old/` 目录中的旧版本，逐条说明后端、提示词、PDF/导出链路、前端逻辑以及可视化层的关键改动及其实现方式。
+
+1. 后端与部署拓扑
+-------------------
+• 统一的服务器入口：新的 `backend/app.js` 负责 Express 初始化、CORS 策略、静态资源托管以及 `/api/health`、`/api/analyze`、`/api/generate-pdf` 路由。`backend/server.js` 与 `api/server.js` 仅需引入该模块即可，旧版中重复的路由与 jsPDF 代码被彻底移除。
+• API 契约重写：`/api/analyze` 现只需一次传入 `{ input, type }`，URL 会通过 `extractTextFromURL` 统一抓取，服务端强制 10 ≤ 长度 ≤ 20,000，并返回包含 `agents`、`summary`、耗时元数据及 `source` 预览的一体化 JSON。旧版需前端调用 `/api/analyze/:dimension` 六次并各自触发 OpenAI 调用。
+• PDF 生成功能集中：`/api/generate-pdf` 现在委托 `backend/services/pdfGenerator.js` 生成缓冲区，取代旧版 `api/server.js` 内联的 jsPDF 实现，保证抬头、版式与总结页一致。
+• 健康检查加强：`/api/health` 会返回主模型、总结模型、是否配置 API Key 及自定义 Base URL，方便运维核查多模型部署状态。
+
+2. 多智能体分析实现
+---------------------
+• 全新调度器（`backend/services/analyzer.js`）：替换旧的 `analyzeContentModeA/B` SSE 逻辑，统一构建支持 `undici` 代理的 OpenAI 客户端，并通过 `Promise.all` 并行调度六个 `runAgent`。
+• 维度提示模板：`backend/prompts/dimensions.js` 现包含系统提示、用户模板、显示标签、代号与目标字数。`buildAgentMessages` 与 `buildSummaryMessages` 负责自动拼接 Chat Completion 的消息体。
+• 总结生成：六个智能体完成后，`buildSummary()` 会调用独立的总结模型（可由 `SUMMARY_MODEL` 配置）输出跨维度洞察，并在失败时返回明确的错误信息供前端提示。
+• 模型路由：`backend/config/config.js` 新增 `agentModels`、`summaryModel`，默认指向 `kimi-k2-turbo-preview`，亦可按维度覆写，同时支持自定义 `OPENAI_BASE_URL`。默认端口提升至 5000，并保留 `ANALYSIS_MODE` 兼容旧配置。
+• 结构化结果：`runMultiAgentAnalysis()` 返回原文、副作用时间戳、每个智能体的状态/代号/Token 用量以及整体耗时，方便前端直接渲染进度而无需再解析 SSE 流。
+
+3. 数据获取与离线资产
+-----------------------
+• 抓取器重写：`backend/services/scraper.js` 不再依赖 axios + cheerio，改为使用原生 `fetch` 搭配针对性的正则清理脚本与多媒体标签，将块级标签转换为换行并统一空白字符，减小冷启动体积且兼容 Vercel。
+• PDF 版式升级：仍基于 PDFKit，但参数新增 `{ content, results, summary, timestamp }`，可选生成 “Executive Summary” 页面，并在缺失分析结果时输出兜底文本。`addDimension()` 帮助函数为六个维度生成独立页面，末页保留品牌介绍与免责声明。
+
+4. 前端应用逻辑（`frontend/js/app.js`）
+----------------------------------------
+• 状态结构：`analysisResults` 新增 `summary` 字段，顶层状态加入 `summaryResult`、`analysisMeta` 用于缓存总结文本与运行时长。
+• 单次分析请求：`startParallelAnalysis()` 仅向 `/api/analyze` 发送一次 `fetch`，再把聚合响应写入六张卡片，旧版的六次重试/回退逻辑与 EventSource 流完全移除。
+• 总结生命周期：`resetSummaryCard()`、`renderSummary()` 负责控制新总结卡片，展示模型名称与耗时（来源于 `elapsedMs`）。
+• 来源预览：`updateExtractedContentView()` 在 URL 模式下展示抓取出的前 1,200 字及字符统计，直接使用后端返回的 `source` 数据。
+• PDF 导出载荷：`handleDownload()` 会同时上传六维度结果与总结文本，使生成的 PDF 与前端所见一致。
+
+5. 页面结构与样式（`frontend/index.html`, `frontend/css/style.css`）
+--------------------------------------------------------------
+• 头部配色：分析页顶部改为不透明的 `#0d1840` 并叠加阴影，确保 “PRIVACY PRISM / SYSTEM ONLINE” 在任何背景下可读；旧版为半透明玻璃质感。
+• 总结位置：新增的总结卡片位于六大维度下方，符合“先看细分视角，再读综合建议”的信息结构。
+• 页脚精简：移除 “TECHNOLOGY · Powered by OpenAI GPT-4o / Version 1.0.0 | 2025” 区块，仅保留法律免责声明与产品标识。
+• 样式补充：新增 `.summary-card` 及相关状态/计时样式，设置渐变、模糊与统一的间距（`margin: var(--spacing-2xl) 0`），在视觉上呼应新增的总结功能。
+
+6. 用户可感知的体验提升
+---------------------------
+• URL 模式回馈：抓取预览与字符统计让用户在分析前即可确认内容成功获取。
+• 体感速度：六个 OpenAI 调用由服务器并发执行，前端只显示一次加载状态，并由服务端直接给出完成时间，减少反复闪烁。
+• 导出效果：PDF 报告按“封面—六维度—总结—品牌说明”输出，与界面结构完全一致，无需手工排版。
+• 视觉聚焦：不透明头部和精简页脚令分析工作区更像控制台，而非营销落地页。
+
+7. 开发者注意事项
+-------------------
+• 接口契约：前端假设 `analysis.agents[key].content`、`summary.content`、`summary.model` 与 `elapsedMs` 均可用，后端若调整需同步更新 `renderSummary()` 等函数。
+• 环境变量：若设置 `HTTPS_PROXY`/`HTTP_PROXY` 且安装 `undici`，OpenAI 客户端会自动走代理；缺失时会提示但保持可用。
+• 安全缺省：服务端强制最短 10 字、超长截断 20,000 字，同时在 URL 抓取失败时返回 400，避免把底层错误暴露给用户。
+• 部署一致性：本地 Node 与 Vercel Serverless 共享同一 `app`，因此配置与路由逻辑不会再漂移。
+
+综上，Privacy Prism 已从“前端串行调度 + 多路 SSE”升级为“后端多智能体汇总 + 统一 UX”，显著提升了易用性、性能与文档输出质量。

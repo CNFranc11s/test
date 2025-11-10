@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Privacy Prism - AI-powered privacy risk analysis tool">
+  <title>Privacy Prism - Digital Privacy Risk Analyzer</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav-container">
+    <div class="nav-content">
+      <a href="#" class="nav-logo" onclick="showPage('home')">
+        <span style="font-weight: 700; font-size: 1.2rem;">PRIVACY PRISM</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#" onclick="showPage('home')">Home</a></li>
+        <li><a href="#" onclick="showPage('about')">About Prisms</a></li>
+        <li><a href="#" onclick="showPage('analysis')">Analyze</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Home Page -->
+  <section id="home-page" class="page-section active">
+    <div class="hero-section">
+      <div class="hero-content">
+        <h1 class="hero-title">Privacy Prism</h1>
+        <p class="hero-subtitle">Digital Privacy Risk Analyzer</p>
+        <p class="hero-description">
+          A Multi-Dimensional privacy analysis tool that reveals hidden risks in text and links through a six-dimensional evaluation framework
+        </p>
+        <div class="cta-buttons">
+          <a href="#" class="btn-primary" onclick="showPage('analysis')">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="5,3 19,12 5,21"></polygon>
+            </svg>
+            Try it now
+          </a>
+          <a href="#" class="btn-secondary" onclick="showPage('about')">
+            About Prisms
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Page -->
+  <section id="about-page" class="page-section">
+    <div class="about-section">
+      <div class="about-card">
+        <h2 class="about-title">What is Privacy Prism?</h2>
+        <p class="about-text">
+          Privacy Prism is an interactive analysis platform centered on the topic of data privacy. It is designed to help users understand the hidden privacy risks embedded in today's digital environment. When we post, repost, or comment on social media, short-video apps, or online platforms, we often—sometimes unknowingly reveal personal information, preferences, or behavioral patterns. These traces can be recorded, inferred, amplified, or repurposed by platform algorithms.
+        </p>
+        <p class="about-text">
+          By entering a piece of text or a link, Privacy Prism analyzes the content through six dimensions—Exposure, Inference, Audience & Consequences, Platforms & Rules, Amplification, and Manipulability and generates a structured Privacy Risk Report.
+        </p>
+        <p class="about-text">
+          Built on a multi-agent architecture, the system simulates different perspectives on privacy, offering a window into how algorithms interpret and process the same text from multiple angles. The goal of this platform is to make data privacy visible, tangible, and comprehensible.
+        </p>
+        <p class="about-text">
+          In an era where algorithms shape information flows, data has become a new form of social currency: our actions, interests, and expressions are constantly collected, computed, and reassembled informing content distribution, targeted advertising, and even digital profiling. Privacy Prism aims to provide users with a renewed understanding of "privacy" in this complex landscape, helping individuals regain awareness and agency over their digital footprints.
+        </p>
+      </div>
+
+    <div class="about-card">
+  <h2 class="about-title">Six Dimensions of Privacy Risk</h2>
+
+  <div class="risk-slider-container">
+    <button class="risk-slider-btn prev">&#10094;</button>
+
+    <div class="risk-slider">
+      <div class="risk-card">
+        <h3 class="risk-card-title">01. EXPOSURE</h3>
+        <p>Contains explicit personal details like names, phone numbers, addresses, or identifiable locations that directly reveal identity.</p>
+      </div>
+
+      <div class="risk-card">
+        <h3 class="risk-card-title">02. INFERENCE</h3>
+        <p>Subtle cues (tone, interests, timing, or location hints) may allow algorithms to infer hidden attributes like emotions, income, or relationships.</p>
+      </div>
+
+      <div class="risk-card">
+        <h3 class="risk-card-title">03. AUDIENCE & CONSEQUENCES</h3>
+        <p>Content may reach unintended audiences such as employers or institutions, causing misunderstandings or reputational effects.</p>
+      </div>
+
+      <div class="risk-card">
+        <h3 class="risk-card-title">04. PLATFORMS & RULES</h3>
+        <p>Algorithms and policies of platforms shape who can see content, determining privacy exposure and circulation limits.</p>
+      </div>
+
+      <div class="risk-card">
+        <h3 class="risk-card-title">05. AMPLIFICATION</h3>
+        <p>Platform algorithms might amplify content visibility, causing it to spread more widely and faster than expected.</p>
+      </div>
+
+      <div class="risk-card">
+        <h3 class="risk-card-title">06. MANIPULABILITY</h3>
+        <p>Digital content can be reframed, edited, or recombined with other data, creating distortion and future misuse risks.</p>
+      </div>
+    </div>
+
+    <button class="risk-slider-btn next">&#10095;</button>
+  </div>
+</div>
+
+
+  </section>
+
+  <!-- Analysis Page -->
+  <section id="analysis-page" class="page-section">
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">
+      
+            <div class="logo-text">
+              <h1>PRIVACY PRISM</h1>
+              <span class="logo-subtitle">Digital Privacy Risk Analyzer</span>
+            </div>
+          </div>
+          <div class="header-meta">
+            <span class="status-indicator">
+              <span class="status-dot"></span>
+              SYSTEM ONLINE
+            </span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="container">
+        
+        <!-- Input Section -->
+        <section class="input-section">
+          <div class="section-header">
+            <h2 class="section-title">
+              <svg class="section-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="2" width="20" height="20" rx="2"/>
+                <path d="M7 12 L11 16 L17 8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              DATA INPUT
+            </h2>
+            <span class="section-label">STEP 1 OF 2</span>
+          </div>
+          
+          <div class="input-type-selector">
+            <label class="radio-option">
+              <input type="radio" name="inputType" value="text" checked>
+              <div class="radio-content">
+                <svg class="option-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="3" width="18" height="18" rx="2"/>
+                  <line x1="7" y1="9" x2="17" y2="9"/>
+                  <line x1="7" y1="13" x2="14" y2="13"/>
+                  <line x1="7" y1="17" x2="11" y2="17"/>
+                </svg>
+                <div class="option-text">
+                  <span class="option-title">TEXT INPUT</span>
+                  <span class="option-desc">Direct content analysis</span>
+                </div>
+              </div>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="inputType" value="url">
+              <div class="radio-content">
+                <svg class="option-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M10 13 L10 11 C10 9.9 10.9 9 12 9 L16 9 C17.1 9 18 9.9 18 11 L18 13 C18 14.1 17.1 15 16 15 L12 15 C10.9 15 10 14.1 10 13 Z"/>
+                  <path d="M14 15 L14 17 C14 18.1 13.1 19 12 19 L8 19 C6.9 19 6 18.1 6 17 L6 15 C6 13.9 6.9 13 8 13 L12 13 C13.1 13 14 13.9 14 15 Z"/>
+                </svg>
+                <div class="option-text">
+                  <span class="option-title">URL INPUT</span>
+                  <span class="option-desc">Web scraping analysis</span>
+                </div>
+              </div>
+            </label>
+          </div>
+
+          <div class="input-container">
+            <div class="input-field" id="textInput">
+              <label for="textArea" class="field-label">
+                <span>CONTENT</span>
+                <span class="field-hint">Enter text for privacy risk assessment</span>
+              </label>
+              <textarea 
+                id="textArea" 
+                placeholder="Paste your content here..."
+                rows="8"
+              ></textarea>
+            </div>
+
+            <div class="input-field hidden" id="urlInput">
+              <label for="urlField" class="field-label">
+                <span>URL ADDRESS</span>
+                <span class="field-hint">Enter webpage URL for content extraction</span>
+              </label>
+              <input 
+                type="url" 
+                id="urlField" 
+                placeholder="https://example.com/article"
+              >
+            </div>
+          </div>
+
+          <button class="analyze-btn" id="analyzeBtn">
+            <svg class="btn-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+              <polygon points="5,3 19,12 5,21"/>
+            </svg>
+            <span>INITIATE ANALYSIS</span>
+            <svg class="btn-arrow" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12 L19 12 M13 6 L19 12 L13 18" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </section>
+
+        <!-- Extracted Content Preview (for URL mode) -->
+        <section class="extracted-content-section hidden" id="extractedContentSection">
+          <div class="section-header">
+            <h2 class="section-title">
+              <svg class="section-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                <line x1="7" y1="9" x2="17" y2="9"/>
+                <line x1="7" y1="13" x2="14" y2="13"/>
+              </svg>
+              EXTRACTED CONTENT
+            </h2>
+            <span class="section-label">SOURCE MATERIAL</span>
+          </div>
+          <div class="extracted-content-box">
+            <div class="content-meta">
+              <span class="content-length" id="contentLength">0 characters</span>
+              <span class="content-status">
+                <svg class="status-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M8 12 L11 15 L16 9" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Extraction Complete</span>
+              </span>
+            </div>
+            <div class="content-preview" id="contentPreview">
+              <p class="preview-text"></p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="results-section hidden" id="resultsSection">
+          <div class="section-header">
+            <h2 class="section-title">
+              <svg class="section-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="2" width="20" height="20" rx="2"/>
+                <path d="M7 7 L17 17 M17 7 L7 17" stroke-linecap="round"/>
+              </svg>
+              ANALYSIS RESULTS
+            </h2>
+            <button class="download-btn hidden" id="downloadBtn">
+              <svg class="btn-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 3 L12 15 M8 11 L12 15 L16 11" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M3 17 L3 19 C3 20.1 3.9 21 5 21 L19 21 C20.1 21 21 20.1 21 19 L21 17" stroke-linecap="round"/>
+              </svg>
+              <span>EXPORT PDF</span>
+            </button>
+          </div>
+
+          <!-- Dimensions Grid -->
+          <div class="dimensions-grid">
+            
+            <!-- Dimension 1: Exposure -->
+            <div class="dimension-card" id="dimension-exposure" data-index="01">
+              <div class="dimension-header">
+                <div class="dimension-meta">
+                  <span class="dimension-number">01</span>
+                  <div class="dimension-info">
+                    <h3 class="dimension-title">EXPOSURE</h3>
+                    <p class="dimension-subtitle">Identifiable Personal Information</p>
+                  </div>
+                </div>
+                <div class="dimension-status">
+                  <div class="loading-spinner">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10" stroke-dasharray="31.4 31.4" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div class="dimension-content">
+                <p class="placeholder-text">Awaiting analysis data...</p>
+              </div>
+            </div>
+
+            <!-- Dimension 2: Inference -->
+            <div class="dimension-card" id="dimension-inference" data-index="02">
+              <div class="dimension-header">
+                <div class="dimension-meta">
+                  <span class="dimension-number">02</span>
+                  <div class="dimension-info">
+                    <h3 class="dimension-title">INFERENCE</h3>
+                    <p class="dimension-subtitle">Sensitive Information Deduction</p>
+                  </div>
+                </div>
+                <div class="dimension-status">
+                  <div class="loading-spinner">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10" stroke-dasharray="31.4 31.4" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div class="dimension-content">
+                <p class="placeholder-text">Awaiting analysis data...</p>
+              </div>
+            </div>
+
+            <!-- Dimension 3: Audience -->
+            <div class="dimension-card" id="dimension-audience" data-index="03">
+              <div class="dimension-header">
+                <div class="dimension-meta">
+                  <span class="dimension-number">03</span>
+                  <div class="dimension-info">
+                    <h3 class="dimension-title">AUDIENCE & CONSEQUENCES</h3>
+                    <p class="dimension-subtitle">Potential Reach & Impact</p>
+                  </div>
+                </div>
+                <div class="dimension-status">
+                  <div class="loading-spinner">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10" stroke-dasharray="31.4 31.4" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div class="dimension-content">
+                <p class="placeholder-text">Awaiting analysis data...</p>
+              </div>
+            </div>
+
+            <!-- Dimension 4: Platforms -->
+            <div class="dimension-card" id="dimension-platforms" data-index="04">
+              <div class="dimension-header">
+                <div class="dimension-meta">
+                  <span class="dimension-number">04</span>
+                  <div class="dimension-info">
+                    <h3 class="dimension-title">PLATFORMS & RULES</h3>
+                    <p class="dimension-subtitle">Platform Policy Risks</p>
+                  </div>
+                </div>
+                <div class="dimension-status">
+                  <div class="loading-spinner">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10" stroke-dasharray="31.4 31.4" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div class="dimension-content">
+                <p class="placeholder-text">Awaiting analysis data...</p>
+              </div>
+            </div>
+
+            <!-- Dimension 5: Amplification -->
+            <div class="dimension-card" id="dimension-amplification" data-index="05">
+              <div class="dimension-header">
+                <div class="dimension-meta">
+                  <span class="dimension-number">05</span>
+                  <div class="dimension-info">
+                    <h3 class="dimension-title">AMPLIFICATION</h3>
+                    <p class="dimension-subtitle">Viral Spread Potential</p>
+                  </div>
+                </div>
+                <div class="dimension-status">
+                  <div class="loading-spinner">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10" stroke-dasharray="31.4 31.4" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div class="dimension-content">
+                <p class="placeholder-text">Awaiting analysis data...</p>
+              </div>
+            </div>
+
+            <!-- Dimension 6: Manipulability -->
+            <div class="dimension-card" id="dimension-manipulability" data-index="06">
+              <div class="dimension-header">
+                <div class="dimension-meta">
+                  <span class="dimension-number">06</span>
+                  <div class="dimension-info">
+                    <h3 class="dimension-title">MANIPULABILITY</h3>
+                    <p class="dimension-subtitle">Distortion & Misuse Risk</p>
+                  </div>
+                </div>
+                <div class="dimension-status">
+                  <div class="loading-spinner">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10" stroke-dasharray="31.4 31.4" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div class="dimension-content">
+                <p class="placeholder-text">Awaiting analysis data...</p>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="summary-card hidden" id="summaryCard">
+            <div class="summary-header">
+              <div class="summary-meta">
+                <span class="summary-label">MULTI-AGENT SYNTHESIS</span>
+                <h3 class="summary-title">Executive Summary</h3>
+              </div>
+              <div class="summary-status" id="summaryStatus">Awaiting agents...</div>
+            </div>
+            <div class="summary-body" id="summaryContent">
+              <p class="placeholder-text">The summary LLM will activate after all six agents finish.</p>
+            </div>
+            <div class="summary-footer">
+              <span class="summary-model" id="summaryModel"></span>
+              <span class="summary-timer" id="summaryTimer"></span>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4 class="footer-title">LEGAL DISCLAIMER</h4>
+          <p class="footer-text">
+            This platform provides privacy risk assessments for educational and informational purposes only. 
+            All results should be reviewed by qualified privacy professionals before making important decisions. 
+            No liability is assumed for actions taken based on these assessments.
+          </p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 PRIVACY PRISM</span>
+        <span class="footer-divider">|</span>
+        <span>RISK ANALYSIS PLATFORM</span>
+      </div>
+    </div>
+  </footer>
+  
+
+  <script src="js/app.js"></script>
+</body>
+</html>
